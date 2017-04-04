@@ -88,11 +88,15 @@ require 'sinatra'
   end
 
 
-get '/' do
-  redirect '/10/2/10.1'
-end
+#get '/' do
+  #redirect '/10/2/10.1'
+#end
 
-get '/:inBase/:outBase/:inString' do
+#get '/:inBase/:outBase/:inString' do
+get '/' do
+params[:inBase] = 10 if params[:inBase].nil?
+params[:outBase] = 2 if params[:outBase].nil?
+params[:inString] = 10.1 if params[:inString].nil?
   params[:outString] = convert(params[:inBase],params[:outBase],params[:inString])
 erb %{
 <html>
@@ -102,11 +106,11 @@ erb %{
 
 <table style="border:0">
 <form method="GET" action="/">
-<tr><td>N&uacute;mero: </td><td><input type="text" value="<%= params[:inString] %>" name="post[inString]" /></td></tr>
-<tr><td>Base: </td><td><input type="text" value="<%= params[:inBase] %>" name="post[inBase]" /></td></tr>
-<tr><td>Base destino: </td><td><input type="text" value="<%= params[:outBase] %>" name="post[outBase]" /></td></tr>
+<tr><td>N&uacute;mero: </td><td><input type="text" value="<%= params[:inString] %>" name="inString" /></td></tr>
+<tr><td>Base: </td><td><input type="text" value="<%= params[:inBase] %>" name="inBase" /></td></tr>
+<tr><td>Base destino: </td><td><input type="text" value="<%= params[:outBase] %>" name="outBase" /></td></tr>
 <tr><td><input type="submit" /></td></tr>
-<tr><td>Resultado: </td><td><input type="text" value="<%= params[:outString] %>" name="post[outString]" /></td></tr>
+<tr><td>Resultado: </td><td><input type="text" value="<%= params[:outString] %>" name="outString" /></td></tr>
 
 </form>
 </table>
