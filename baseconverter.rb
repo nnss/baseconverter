@@ -51,7 +51,7 @@ require 'sinatra'
   def convertDecFromTen(number, outBase)
     output = '.'
     number = number.to_f
-    counter = 100
+    counter = 10
     while counter > 0
       counter-=1
       number = number * outBase.to_i
@@ -101,8 +101,14 @@ params[:outString] = convert(params[:inBase],params[:outBase],params[:inString])
 # as is a simple examle, HTMl is inline, this should be a separated file
 erb %{
 <html>
-  <head><title>Base Converter</title></head>
-  <body style="    margin-left:auto; margin-right:auto; " >
+  <head><title>Base Converter</title>
+<style>
+body {
+padding: 10px;
+}
+</style>
+</head>
+  <body >
 <h1>Base Converter</h1>
 
 <table style="border:0">
@@ -115,7 +121,6 @@ erb %{
 
 </form>
 </table>
-
   </body>
 </html>
 } 
