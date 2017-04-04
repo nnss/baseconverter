@@ -65,7 +65,7 @@ require 'sinatra'
         return output
       end
       if current >= 10
-        output = output + (55 + current).ord;
+        output = output + (55 + current).ord.chr;
       else
         output = output + current.to_s;
       end
@@ -88,20 +88,21 @@ require 'sinatra'
   end
 
 
-#get '/' do
-  #redirect '/10/2/10.1'
-#end
-
-#get '/:inBase/:outBase/:inString' do
 get '/' do
+# setting default values
 params[:inBase] = 10 if params[:inBase].nil?
 params[:outBase] = 2 if params[:outBase].nil?
 params[:inString] = 10.1 if params[:inString].nil?
-  params[:outString] = convert(params[:inBase],params[:outBase],params[:inString])
+
+# setting the result
+params[:outString] = convert(params[:inBase],params[:outBase],params[:inString])
+
+# showing the HTML
+# as is a simple examle, HTMl is inline, this should be a separated file
 erb %{
 <html>
   <head><title>Base Converter</title></head>
-  <body>
+  <body style="    margin-left:auto; margin-right:auto; " >
 <h1>Base Converter</h1>
 
 <table style="border:0">
@@ -110,7 +111,7 @@ erb %{
 <tr><td>Base: </td><td><input type="text" value="<%= params[:inBase] %>" name="inBase" /></td></tr>
 <tr><td>Base destino: </td><td><input type="text" value="<%= params[:outBase] %>" name="outBase" /></td></tr>
 <tr><td><input type="submit" /></td></tr>
-<tr><td>Resultado: </td><td><input type="text" value="<%= params[:outString] %>" name="outString" /></td></tr>
+<tr><td>Resultado: </td><td><label><%= params[:outString] %></label></td></tr>
 
 </form>
 </table>
